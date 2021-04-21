@@ -11,10 +11,12 @@ const initialState = {
     ]
 }
 
-export const GlobalContext = createContext(initialState);
+export const GlobalContext = createContext();
 
 export const GlobalProvider = ({ children }) => {
     const [state, setState] = useState(initialState);
+    const [isModal, setIsModal] = useState(false);
+    const [deleteId, setDeleteId] = useState();
 
     function increase (id) {
         const newState = {...state};
@@ -29,6 +31,9 @@ export const GlobalProvider = ({ children }) => {
         if (singleCart.amount >= 2) {
             singleCart.amount = singleCart.amount - 1;
             setState(newState);
+        } else if (singleCart.amount == 1) {
+            setIsModal(true);
+            setDeleteId(id);
         }
         
     }
@@ -38,6 +43,7 @@ export const GlobalProvider = ({ children }) => {
         const singleCart = newState.products.find(item => item.id === id);
         singleCart.inCart = false;
         setState(newState);
+        setIsModal(false);
     }
 
     function addCart (id) {
@@ -47,13 +53,22 @@ export const GlobalProvider = ({ children }) => {
         setState(newState);
     }
 
+    function confirmDelete (id) {
+        setIsModal(true);
+        setDeleteId(id);
+    }
+
     return(<GlobalContext.Provider value={{
         products: state.products,
         cart: state.cart,
         increase,
         decrease,
         deleteCart,
-        addCart
+        addCart,
+        confirmDelete,
+        isModal,
+        setIsModal,
+        deleteId
     }}>
         { children }
     </GlobalContext.Provider>)

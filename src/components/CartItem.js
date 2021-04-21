@@ -1,9 +1,10 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import Amount from './Amount';
-import { GlobalContext } from '../context/GlobalState';
+import RemoveCart from './RemoveCart';
+
 
 const CartItem = ({ item }) => {
-    const { deleteCart } = useContext(GlobalContext);
+
 
     let amount = parseInt(item.amount);
     let price = parseInt(item.price);
@@ -16,7 +17,7 @@ const CartItem = ({ item }) => {
             <h3>${item.price}</h3>
             <Amount item={item} />
             <h3>${total}</h3>
-            <div className="remove"><span onClick={(e) => deleteCart(item.id)} >X</span></div>
+            <RemoveCart item={item} />
         </div>
        
     )

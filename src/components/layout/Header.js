@@ -5,7 +5,6 @@ import { GlobalContext } from '../../context/GlobalState';
 const Header = () => {
     const { products } = useContext(GlobalContext);
     const item = products.filter(cart => cart.inCart === true);
-    console.log(item.length);
 
     return (
         <header>
@@ -13,7 +12,7 @@ const Header = () => {
             <nav>
                 <ul>
                     <li><Link to="/" >Shop</Link></li>
-                    <li id="cart-li"><Link to="/cart" >Cart</Link><div id="cart-no">{item.length}</div></li>
+                    <li id="cart-li"><Link to="/cart" >Cart</Link><div id="cart-no">{item.length > 0 && item.length}</div></li>
                 </ul>
             </nav>
         </header>

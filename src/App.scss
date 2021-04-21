@@ -12,6 +12,50 @@ $box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
 
 body {
   background-color: #f4f4f4;
+  overflow-x: hidden;
+}
+
+.app {
+  position: relative;
+}
+
+// Modal 
+.backdrop {
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.6);
+  width: 100vw;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+
+  .modal {
+    background-color: #fff;
+    // max-width: 300px;
+    height: 200px;
+    padding: 3rem 2rem;
+    text-align: center;
+    border-radius: 20px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+    color: $color-light;
+  }
+
+  button {
+    padding: 0.5rem 1rem;
+    font-size: 1.4rem;
+    text-align: center;
+    margin: 1.3rem 0;
+    border: 0;
+    outline: 0;
+    background-color: $color-dark;
+    color: #fff;
+    border-radius: 15px;
+    cursor: pointer;
+  }
 }
 
 #cart-li {
@@ -222,6 +266,12 @@ section#cart {
     font-size: 2rem;
     color: $color-light;
   }
+  h2.empty {
+    margin-top: 5rem;
+    text-align: center;
+    font-size: 2.5rem;
+    color: $color-light;
+  }
   #card-flex {
     display: flex;
     justify-content: space-between;
@@ -278,6 +328,7 @@ section#cart {
         display: flex;
         padding-bottom: 1rem;
         padding-top: 1rem;
+        align-items: center;
         border-bottom: 1px solid $color-light;
         &:last-child {
           border: none;
@@ -295,14 +346,13 @@ section#cart {
           text-align: center;
         }
         .remove {
-          padding: 0rem;
           padding-top: 3rem;
-          width: 150px;
+          // width: 150px;
           text-align: center;
-          font-weight: bold;
-          font-size: 1.3rem;
+          // font-weight: bold;
+          // font-size: 1.3rem;
           color: red;
-          opacity: 0.7;
+          opacity: 0.7;cursor: pointer;
 
           span {
             cursor: pointer;

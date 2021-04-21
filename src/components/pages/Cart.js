@@ -1,16 +1,17 @@
 import React, {useContext} from 'react';
 import CartItem from '../CartItem';
+import Modal from '../Modal'
 import { GlobalContext } from '../../context/GlobalState';
 
 const Cart = () => {
-    const { products } = useContext(GlobalContext);
+    const { products, isModal } = useContext(GlobalContext);
     let cartProduct = products.filter(cart => cart.inCart === true);
     let price = cartProduct.map(product => product.price);
     let subtotal = price.reduce((acc, item) => (acc += item), 0);
     let total = subtotal + 50;
-    console.log(price)
+    console.log(cartProduct)
 
-    return (
+    return cartProduct.length > 0 ? (
         <section id="cart">
             <h1>Your Cart</h1>
             <div id="card-flex">
@@ -39,6 +40,10 @@ const Cart = () => {
                 </div>
             </div>
 
+        </section>
+    ) : (
+        <section id="cart">
+            <h2 className='empty'>Cart is Empty!</h2>
         </section>
     )
 }

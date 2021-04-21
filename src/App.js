@@ -1,26 +1,25 @@
-import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import React, {useContext} from "react";
 import "./App.scss";
+import { Route } from "react-router-dom";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import Shop from "./components/pages/Shop";
 import Cart from "./components/pages/Cart";
 import Product from "./components/pages/Product";
-import { GlobalProvider } from "./context/GlobalState";
+import Modal from './components/Modal';
+import { GlobalContext } from './context/GlobalState';
 
 function App() {
+  const { isModal } = useContext(GlobalContext);
   return (
-    <GlobalProvider>
-      <Router>
-        <>
+        <div className='app'>
           <Header />
-          <Route exact path="/" component={Shop} />
-          <Route path="/cart" component={Cart} />
-          <Route path="/product/:id" component={Product} />
+          {isModal && <Modal />}
+            <Route exact path="/" component={Shop} />
+            <Route path="/cart" component={Cart} />
+            <Route path="/product/:id" component={Product} />
           <Footer />
-        </>
-      </Router>
-    </GlobalProvider>
+        </div>
   );
 }
 
